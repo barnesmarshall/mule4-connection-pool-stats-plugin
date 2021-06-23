@@ -17,6 +17,10 @@ expose some end-points to view connection pool statistics or run some scheduled 
 ![img_1.png](images/img_1.png)
 
 
+* PoolDataSource: This is default DataSource used by our DB connector. For more information please refer to [docs](https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/PooledDataSource.html)
+* Oracle UCP: DataSource to connect with Oracle DB. For more information please refer to [docs](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/jjuar/oracle/ucp/admin/UniversalConnectionPoolMBean.html)
+
+
 ### Operations
 This connector exposes following operations
 
@@ -36,8 +40,6 @@ This connector exposes following operations
 
 
 
-* PoolDataSource: This is default DataSource used by our DB connector. For more information please refer to [docs](https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/PooledDataSource.html)
-* Oracle UCP: DataSource to connect with Oracle DB. For more information please refer to [docs](https://docs.oracle.com/en/database/oracle/oracle-database/12.2/jjuar/oracle/ucp/admin/UniversalConnectionPoolMBean.html)
 
 
 
