@@ -56,7 +56,8 @@ Add this dependency to your application pom.xml
 ```
 
 ### Running test api
+Once you import and run test-api, you can invoke below endpoints
 * Retrieve Customer Data -> http://localhost:8081/api/customers
-* Retrieve all mbeans  -> http://localhost:8081/api/connection-pool/stats/DERBY_DATA_SOURCE
+* Retrieve all mbeans  -> http://localhost:8081/api/connection-pool
 * Retrieve Connection Pool Stats -> http://localhost:8081/api/connection-pool/stats/DERBY_DATA_SOURCE
 * Reset Connection Pool -> http://localhost:8081/api/connection-pool/stats/DERBY_DATA_SOURCE
