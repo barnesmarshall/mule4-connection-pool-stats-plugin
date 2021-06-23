@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<db:config name="reDatabase_Config_Derby_Memory" doc:name="Database Config" doc:id="f1980847-772c-44d0-aa4d-286524149109" >
+		<db:derby-connection subsubProtocol="memory" database="tempdatabase" create="true">
+			<db:pooling-profile minPoolSize="2" maxPoolSize="3">
+				<db:additional-properties >
+					<db:additional-property key="dataSourceName" value="DERBY_DATA_SOURCE" />
+					<db:additional-property key="initialPoolSize" value="2" />
+					<db:additional-property key="maxIdleTime" value="30" />
+					<db:additional-property key="maxConnectionAge" value="6000" />
+					<db:additional-property key="maxIdleTime" value="5" />
+				</db:additional-properties>
+			</db:pooling-profile>
+			<db:connection-properties />
+		</db:derby-connection>
+	</db:config>
+	<flow name="apache-derby-inmemoryFlow1" doc:id="fb986f2f-6b6f-4d8f-a7ea-19e52f4d36df" >
+		<scheduler doc:name="Scheduler" doc:id="645f7dc7-f3d6-4fc1-a9ff-2f0f514d5580" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="50" timeUnit="DAYS"/>
+			</scheduling-strategy>
+		</scheduler>
+		<db:execute-script doc:name="Create Table" doc:id="31221599-489b-4007-a760-504b1a018f5f" config-ref="reDatabase_Config_Derby_Memory">
+			<db:sql ><![CDATA[create table Employee (
+	id INT,
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	email VARCHAR(50)
+)]]></db:sql>
+		</db:execute-script>
+		<logger level="INFO" doc:name="Logger" doc:id="51d00d9d-4346-450a-8b7f-c97422b96b36" message="************* DB CREATED *************"/>
+		<db:execute-script doc:name="INSERT DATA" doc:id="dbb45921-fdcf-4bef-8aa2-f8c5dcd21416" config-ref="reDatabase_Config_Derby_Memory">
+			<db:sql ><![CDATA[insert into Employee (id, first_name, last_name, email) values (1, 'Faydra', 'Borsi', 'fborsi0@yahoo.co.jp')]]></db:sql>
+		</db:execute-script>
+		<ee:transform doc:name="Data" doc:id="a9fe86d6-83c4-46e8-aebf-a11a47f9928c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+[{
+  "id": 1,
+  "first_name": "Gwyneth",
+  "last_name": "Brydone",
+  "email": "gbrydone0@drupal.org"
+}, {
+  "id": 2,
+  "first_name": "Hurleigh",
+  "last_name": "Conduit",
+  "email": "hconduit1@photobucket.com"
+}, {
+  "id": 3,
+  "first_name": "Ezequiel",
+  "last_name": "Berriman",
+  "email": "eberriman2@infoseek.co.jp"
+}, {
+  "id": 4,
+  "first_name": "Leonerd",
+  "last_name": "Deignan",
+  "email": "ldeignan3@un.org"
+}, {
+  "id": 5,
+  "first_name": "Hatty",
+  "last_name": "Mobberley",
+  "email": "hmobberley4@upenn.edu"
+}, {
+  "id": 6,
+  "first_name": "Aldric",
+  "last_name": "Freeborn",
+  "email": "afreeborn5@usa.gov"
+}, {
+  "id": 7,
+  "first_name": "Myrvyn",
+  "last_name": "Burgis",
+  "email": "mburgis6@networkadvertising.org"
+}, {
+  "id": 8,
+  "first_name": "Helaina",
+  "last_name": "Goody",
+  "email": "hgoody7@geocities.com"
+}, {
+  "id": 9,
+  "first_name": "Maye",
+  "last_name": "Willbond",
+  "email": "mwillbond8@alexa.com"
+}, {
+  "id": 10,
+  "first_name": "Laurens",
+  "last_name": "Pregal",
+  "email": "lpregal9@ed.gov"
+}]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:bulk-insert doc:name="Bulk insert" doc:id="8f1e4ddc-2ed2-4ebc-8f0a-0c4a2c167980" config-ref="reDatabase_Config_Derby_Memory">
+			<db:sql ><![CDATA[insert into Employee (id, first_name, last_name, email) values (:id, :first_name, :last_name, :email)]]></db:sql>
+		</db:bulk-insert>
+		<logger level="INFO" doc:name="Logger" doc:id="aeab3889-36a0-4a53-8a87-5a1727f885a2" message="Insertion complete!!!!"/>
+	</flow>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a73b4ade-4ebb-4157-9c33-8c6251ad10cd">
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+</mule>

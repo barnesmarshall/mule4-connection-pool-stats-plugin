@@ -1,0 +1,38 @@
+#%RAML 1.0
+title: db-connection-pool-statistics 
+baseUri: http://localhost:8081
+
+/customers:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              
+/connection-pool:
+  get:
+   responses:
+     200:
+       body:
+         application/json:
+  /stats/{poolName}:
+    uriParameters:
+      poolName: string
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              
+  /reset/{poolName}:
+    uriParameters:
+      poolName:
+        type: string
+    put:
+      responses:
+        200:
+          body:
+            application/json:
+              
+    
+     
