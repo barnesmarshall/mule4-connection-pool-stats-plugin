@@ -41,7 +41,7 @@ This connector exposes following operations
 
 
 
-### How  to install/user?
+### How  to install/use?
 Clone this repository and run `mvn clean install` command on the parent `pom.xml`. This repository also contains a sample api
 to demonstrate usage of the connector. 
 
