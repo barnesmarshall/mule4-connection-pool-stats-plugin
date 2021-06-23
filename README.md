@@ -54,3 +54,9 @@ Add this dependency to your application pom.xml
         <classifier>mule-plugin</classifier>
 </dependency>
 ```
+
+### Running test api
+* Retrieve Customer Data -> http://localhost:8081/api/customers
+* Retrieve all mbeans  -> http://localhost:8081/api/connection-pool/stats/DERBY_DATA_SOURCE
+* Retrieve Connection Pool Stats -> http://localhost:8081/api/connection-pool/stats/DERBY_DATA_SOURCE
+* Reset Connection Pool -> http://localhost:8081/api/connection-pool/stats/DERBY_DATA_SOURCE
