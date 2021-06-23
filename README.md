@@ -26,6 +26,7 @@ This connector exposes following operations
   
   ![img_2.png](images/img_2.png)
 * Get Connection Pool Stats: Retrieve current metrics of a particular connection pool
+
   ![img_3.png](images/img_3.png)
 * Reset Connection Pool: Reset specified connection pool. Based on type of datasource you have selected, this connector will invoke different method for resetting connection pool
 
