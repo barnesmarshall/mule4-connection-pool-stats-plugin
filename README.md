@@ -1,5 +1,5 @@
 # connection-pool-stats-plugin
-This connector can retrieve database-connection-pool metrics from the JVM by accessing MBeans. JVM could be on cloudhub, hybrid or on-prem. Irrespective of the infrastructure, we use our Database connector to connect with databases, either we use our own datasource or one offered by Database connector to connect with Database. Most of the Datasources have mechanism to register Mbeans to JMX server. This connector lets you connect
+This connector can retrieve database-connection-pool metrics from the JVM by accessing MBeans. JVM could be on cloudhub, hybrid or on-prem. Irrespective of the infrastructure, we use our Database connector to connect with databases, either we use our own datasource or one offered by Database connector. Most of the Datasources have mechanism to register Mbeans to JMX server. This connector lets you connect
 with local JMX Server and access Mbeans. You can packge this connector with your core db-system-api then you can either 
 expose some end-points to view connection pool statistics or run some scheduled job to capture data.
 
