@@ -1,5 +1,6 @@
 package org.mule.extension.internal.connections;
 
+import afu.org.checkerframework.checker.oigj.qual.O;
 import com.mchange.v2.c3p0.PooledDataSource;
 import org.mule.runtime.extension.api.annotation.param.Optional;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
@@ -9,9 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.management.*;
 import java.lang.management.ManagementFactory;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class C3P0StatsConnection extends DataSourceStatsConnection {
     Logger logger = LoggerFactory.getLogger(C3P0StatsConnection.class);
@@ -22,7 +21,7 @@ public class C3P0StatsConnection extends DataSourceStatsConnection {
 
     public C3P0StatsConnection(String mbeanName) {
         this.mbeanName = mbeanName;
-       // logger.info("Initializing C3P0 Datasource tracking ....");
+        // logger.info("Initializing C3P0 Datasource tracking ....");
         this.mBeanServerConnection = ManagementFactory.getPlatformMBeanServer();
     }
 
@@ -60,7 +59,7 @@ public class C3P0StatsConnection extends DataSourceStatsConnection {
 
     @Override
     public List<String> findPools() {
-        return findConnectionPools(mbeanName, mBeanServerConnection);
+        return findConnectionPools(mbeanName, mBeanServerConnection,DATASOURCE_FIELD_NAME);
     }
 
     @Override

@@ -25,7 +25,7 @@ public abstract class DataSourceStatsConnection {
     public abstract List<Map<String, String>> getConnectionPoolStats(String poolName);
 
 
-    public List<String> findConnectionPools(String searchPattern, MBeanServerConnection mbeanServer) {
+    public List<String> findConnectionPools(String searchPattern, MBeanServerConnection mbeanServer, String dataSourceField) {
         if (logger.isDebugEnabled()) {
             logger.debug("Finding connection with search Pattern [{}]", searchPattern);
         }
@@ -33,8 +33,7 @@ public abstract class DataSourceStatsConnection {
         try {
             Set<ObjectName> objectNames = mbeanServer.queryNames(new ObjectName(searchPattern), null);
             for (ObjectName obj : objectNames) {
-                String canonicalName = obj.getCanonicalName();
-                pools.add(canonicalName);
+                pools.add(String.valueOf(mbeanServer.getAttribute(obj,dataSourceField)));
             }
             return pools;
 

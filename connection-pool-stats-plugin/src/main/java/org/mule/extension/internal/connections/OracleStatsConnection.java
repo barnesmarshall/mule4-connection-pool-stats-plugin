@@ -60,7 +60,7 @@ public class OracleStatsConnection extends DataSourceStatsConnection {
 
     @Override
     public List<String> findPools() {
-        return findConnectionPools(mbeanName, mBeanServerConnection);
+        return findConnectionPools(mbeanName, mBeanServerConnection,DATASOURCE_FIELD_NAME);
     }
 
     @Override
