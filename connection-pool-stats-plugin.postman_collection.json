@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "45839bbd-c5f6-493d-b4f2-b6387a1be12e",
+		"name": "connection-pool-stats-plugin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "715048"
+	},
+	"item": [
+		{
+			"name": "/customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/connection-pool",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/connection-pool",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"connection-pool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/connection-pool/stats/{poolName}",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/connection-pool/stats/{poolName}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"connection-pool",
+						"stats",
+						"{poolName}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/connection-pool/reset/{poolName}",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/connection-pool/reset/{poolName}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"connection-pool",
+						"reset",
+						"{poolName}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
